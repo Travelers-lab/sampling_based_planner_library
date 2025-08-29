@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sampling_planners.core package &mdash; sampling_based_planner_library 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e370128b"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            sampling_based_planner_library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">sampling_planners.core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-sampling_planners.core.planner">sampling_planners.core.planner module</a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.planner.Planner"><code class="docutils literal notranslate"><span class="pre">Planner</span></code></a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.planner.Planner.plan"><code class="docutils literal notranslate"><span class="pre">Planner.plan()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-sampling_planners.core.sampling">sampling_planners.core.sampling module</a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.HybridSampling"><code class="docutils literal notranslate"><span class="pre">HybridSampling</span></code></a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.HybridSampling.sample"><code class="docutils literal notranslate"><span class="pre">HybridSampling.sample()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.SamplingMethod"><code class="docutils literal notranslate"><span class="pre">SamplingMethod</span></code></a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.SamplingMethod.sample"><code class="docutils literal notranslate"><span class="pre">SamplingMethod.sample()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.StaticSampling"><code class="docutils literal notranslate"><span class="pre">StaticSampling</span></code></a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.StaticSampling.sample"><code class="docutils literal notranslate"><span class="pre">StaticSampling.sample()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.UniformSampling"><code class="docutils literal notranslate"><span class="pre">UniformSampling</span></code></a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.sampling.UniformSampling.sample"><code class="docutils literal notranslate"><span class="pre">UniformSampling.sample()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-sampling_planners.core.utils">sampling_planners.core.utils module</a><ul>
+<li><a class="reference internal" href="#sampling_planners.core.utils.calculate_path_cost"><code class="docutils literal notranslate"><span class="pre">calculate_path_cost()</span></code></a></li>
+<li><a class="reference internal" href="#sampling_planners.core.utils.collision_check"><code class="docutils literal notranslate"><span class="pre">collision_check()</span></code></a></li>
+<li><a class="reference internal" href="#sampling_planners.core.utils.heuristic"><code class="docutils literal notranslate"><span class="pre">heuristic()</span></code></a></li>
+<li><a class="reference internal" href="#sampling_planners.core.utils.nearest_neighbor"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-sampling_planners.core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">sampling_based_planner_library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">sampling_planners.core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/sampling_planners.core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sampling-planners-core-package">
+<h1>sampling_planners.core package<a class="headerlink" href="#sampling-planners-core-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-sampling_planners.core.planner">
+<span id="sampling-planners-core-planner-module"></span><h2>sampling_planners.core.planner module<a class="headerlink" href="#module-sampling_planners.core.planner" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sampling_planners.core.planner.Planner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sampling_planners.core.planner.</span></span><span class="sig-name descname"><span class="pre">Planner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/planner.html#Planner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.planner.Planner" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract base class for planners.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sampling_planners.core.planner.Planner.plan">
+<span class="sig-name descname"><span class="pre">plan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/planner.html#Planner.plan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.planner.Planner.plan" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sampling_planners.core.sampling">
+<span id="sampling-planners-core-sampling-module"></span><h2>sampling_planners.core.sampling module<a class="headerlink" href="#module-sampling_planners.core.sampling" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.HybridSampling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sampling_planners.core.sampling.</span></span><span class="sig-name descname"><span class="pre">HybridSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#HybridSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.HybridSampling" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sampling_planners.core.sampling.SamplingMethod" title="sampling_planners.core.sampling.SamplingMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingMethod</span></code></a></p>
+<p>Uniform + goal-biased sampling.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.HybridSampling.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cost_map</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#HybridSampling.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.HybridSampling.sample" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.SamplingMethod">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sampling_planners.core.sampling.</span></span><span class="sig-name descname"><span class="pre">SamplingMethod</span></span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#SamplingMethod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.SamplingMethod" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for sampling methods.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.SamplingMethod.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cost_map</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#SamplingMethod.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.SamplingMethod.sample" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.StaticSampling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sampling_planners.core.sampling.</span></span><span class="sig-name descname"><span class="pre">StaticSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#StaticSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.StaticSampling" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sampling_planners.core.sampling.SamplingMethod" title="sampling_planners.core.sampling.SamplingMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingMethod</span></code></a></p>
+<p>Static, user-provided samples.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.StaticSampling.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cost_map</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#StaticSampling.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.StaticSampling.sample" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.UniformSampling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sampling_planners.core.sampling.</span></span><span class="sig-name descname"><span class="pre">UniformSampling</span></span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#UniformSampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.UniformSampling" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sampling_planners.core.sampling.SamplingMethod" title="sampling_planners.core.sampling.SamplingMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplingMethod</span></code></a></p>
+<p>Uniform random sampling.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sampling_planners.core.sampling.UniformSampling.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cost_map</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/sampling.html#UniformSampling.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.sampling.UniformSampling.sample" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sampling_planners.core.utils">
+<span id="sampling-planners-core-utils-module"></span><h2>sampling_planners.core.utils module<a class="headerlink" href="#module-sampling_planners.core.utils" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sampling_planners.core.utils.calculate_path_cost">
+<span class="sig-prename descclassname"><span class="pre">sampling_planners.core.utils.</span></span><span class="sig-name descname"><span class="pre">calculate_path_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/utils.html#calculate_path_cost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.utils.calculate_path_cost" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates weighted path cost.
+:param path: Sequence of (x, y) points.
+:type path: list of tuple
+:param cost_map: 2D cost map.
+:type cost_map: np.ndarray
+:param weights: {'length': float, 'cost': float}
+:type weights: dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Weighted cost J.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sampling_planners.core.utils.collision_check">
+<span class="sig-prename descclassname"><span class="pre">sampling_planners.core.utils.</span></span><span class="sig-name descname"><span class="pre">collision_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.99</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/utils.html#collision_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.utils.collision_check" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the line segment is collision-free.
+:param line: ((x0, y0), (x1, y1)) endpoints.
+:type line: tuple
+:param cost_map: 2D cost map.
+:type cost_map: np.ndarray
+:param threshold: Maximum allowed cost value.
+:type threshold: float
+:param step: Step size for interpolation.
+:type step: float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if collision-free, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sampling_planners.core.utils.heuristic">
+<span class="sig-prename descclassname"><span class="pre">sampling_planners.core.utils.</span></span><span class="sig-name descname"><span class="pre">heuristic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/utils.html#heuristic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.utils.heuristic" title="Permalink to this definition"></a></dt>
+<dd><p>Euclidean distance heuristic.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sampling_planners.core.utils.nearest_neighbor">
+<span class="sig-prename descclassname"><span class="pre">sampling_planners.core.utils.</span></span><span class="sig-name descname"><span class="pre">nearest_neighbor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sampling_planners/core/utils.html#nearest_neighbor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sampling_planners.core.utils.nearest_neighbor" title="Permalink to this definition"></a></dt>
+<dd><p>Finds nearest node using KDTree.
+:param nodes: Node coordinates.
+:type nodes: list of tuple
+:param point: Query point.
+:type point: tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Nearest node.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-sampling_planners.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sampling_planners.core" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Chengjin Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
