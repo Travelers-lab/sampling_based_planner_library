@@ -1,6 +1,6 @@
 # algorithms/prm.py
-from sampling_planners.core.planner import Planner
-from sampling_planners.core.utils import collision_check, calculate_path_cost, heuristic, nearest_neighbor
+from src.sampling_planners.core.planner import Planner
+from src.sampling_planners.core.utils import collision_check, calculate_path_cost, heuristic, nearest_neighbor
 from scipy.spatial import KDTree
 import numpy as np
 import heapq
@@ -17,7 +17,7 @@ class PRM(Planner):
     def plan(self, start, goal, cost_map, weights):
         samples = [start, goal]
         while len(samples) < self.n_samples + 2:
-            pt = self.sampling_method.sample(cost_map)
+            pt = self.sampling_method.sample(cost_map, start, goal)
             if cost_map[int(round(pt[0])), int(round(pt[1]))] < 0.99:
                 samples.append(pt)
         tree = KDTree(samples)

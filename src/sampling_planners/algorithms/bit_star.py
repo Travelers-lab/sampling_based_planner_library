@@ -1,6 +1,6 @@
 # algorithms/bit_star.py
-from sampling_planners.core.planner import Planner
-from sampling_planners.core.utils import collision_check, calculate_path_cost, heuristic, nearest_neighbor
+from src.sampling_planners.core.planner import Planner
+from src.sampling_planners.core.utils import collision_check, calculate_path_cost, heuristic, nearest_neighbor
 import numpy as np
 import heapq
 
@@ -22,7 +22,7 @@ class BITStar(Planner):
         for batch in range(self.max_batches):
             # Sample new batch in informed ellipse
             for _ in range(self.batch_size):
-                sample = self.sampling_method.sample(cost_map)
+                sample = self.sampling_method.sample(cost_map, start, goal)
                 if heuristic(start, sample) + heuristic(sample, goal) < best_cost:
                     samples.append(sample)
             # Build edges

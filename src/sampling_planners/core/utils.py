@@ -79,6 +79,8 @@ def nearest_neighbor(nodes, point):
     tuple
         Nearest node.
     """
+    if len(point) != 2:
+        raise ValueError("point must have 2 coordinates")
     tree = KDTree(nodes)
     idx = tree.query(point)[1]
     return nodes[idx]

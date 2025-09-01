@@ -1,6 +1,6 @@
 # algorithms/rrt_connect.py
-from sampling_planners.core.planner import Planner
-from sampling_planners.core.utils import collision_check, calculate_path_cost, nearest_neighbor
+from src.sampling_planners.core.planner import Planner
+from src.sampling_planners.core.utils import collision_check, calculate_path_cost, nearest_neighbor
 import numpy as np
 
 class RRTConnect(Planner):
@@ -19,7 +19,7 @@ class RRTConnect(Planner):
         parents_b = {goal: None}
 
         for _ in range(self.max_iterations):
-            sample = self.sampling_method.sample(cost_map)
+            sample = self.sampling_method.sample(cost_map, start, goal)
             nearest_a = nearest_neighbor(tree_a, sample)
             new_a = self._steer(nearest_a, sample)
             if collision_check((nearest_a, new_a), cost_map):

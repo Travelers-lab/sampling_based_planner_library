@@ -1,6 +1,6 @@
 # algorithms/bidirectional_est.py
-from sampling_planners.core.planner import Planner
-from sampling_planners.core.utils import collision_check, calculate_path_cost, nearest_neighbor
+from src.sampling_planners.core.planner import Planner
+from src.sampling_planners.core.utils import collision_check, calculate_path_cost, nearest_neighbor
 import numpy as np
 
 class BidirectionalEST(Planner):
@@ -36,9 +36,10 @@ class BidirectionalEST(Planner):
                     if cost < best_cost:
                         best_new = new
                         best_cost = cost
-            if best_new:
-                tree_a.append(best_new)
-                parents_a[best_new] = q
+            if best_new is None:
+                tree_a, tree_b = tree_b, tree_a
+                parents_a, parents_b = parents_b, parents_a
+                continue
 
             # Try to connect to tree_b
             nearest_b = nearest_neighbor(tree_b, best_new)
