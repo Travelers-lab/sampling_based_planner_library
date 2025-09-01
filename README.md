@@ -39,7 +39,7 @@ path = planner.plan(start, goal, cost_map, {'length': 0.7, 'cost': 0.3})
 
 print("Path found:", path)
 ```
-**Advanced Examples**
+### Advanced Examples
 1. Using Hybrid Sampling with Bidirectional EST
 ```bash
 from sampling_planners import BidirectionalEST, HybridSampling
@@ -99,4 +99,5 @@ Permissions:
  - Modification
  - Distribution
  - Private use
+
 For business cooperation inquiries, please contact 2210991@tongji.edu.cn.
