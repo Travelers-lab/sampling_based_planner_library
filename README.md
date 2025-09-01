@@ -99,4 +99,4 @@ Permissions:
  - Modification
  - Distribution
  - Private use
- For business cooperation inquiries, please contact 2210991@tongji.edu.cn.
+ - For business cooperation inquiries, please contact 2210991@tongji.edu.cn.
