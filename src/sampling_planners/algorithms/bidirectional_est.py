@@ -1,6 +1,6 @@
 # algorithms/bidirectional_est.py
-from src.sampling_planners.core.planner import Planner
-from src.sampling_planners.core.utils import collision_check, calculate_path_cost, nearest_neighbor
+from ..core.planner import Planner
+from ..core.utils import collision_check, calculate_path_cost, nearest_neighbor
 import numpy as np
 
 class BidirectionalEST(Planner):

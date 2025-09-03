@@ -2,7 +2,7 @@
 from os.path import dirname, join, abspath
 import numpy as np
 from scipy.ndimage import distance_transform_edt
-from src.model.predictor import Predictor
+from sampling_planners.model.predictor import Predictor
 
 class SamplingMethod:
     """Base class for sampling methods."""
@@ -17,40 +17,42 @@ class UniformSampling(SamplingMethod):
 
 class HybridSampling(SamplingMethod):
     """Uniform + goal-biased sampling."""
-    def __init__(self, goal, goal_bias=0.1):
-        self.goal = goal
+    def __init__(self, goal_bias=0.1):
         self.goal_bias = goal_bias
 
     def sample(self, cost_map, start, goal):
         if np.random.rand() < self.goal_bias:
-            return self.goal
+            return goal
         h, w = cost_map.shape
         return (np.random.randint(0, h), np.random.randint(0, w))
 
 class StaticSampling(SamplingMethod):
     """Static, user-provided samples."""
-    def __init__(self, points):
-        self.points = points
+    def __init__(self):
+        self.points = []
         self.idx = 0
 
     def sample(self, cost_map, start, goal):
+        if not self.points:
+            h, w = cost_map.shape
+            return (np.random.randint(0, h), np.random.randint(0, w))
         pt = self.points[self.idx]
         self.idx = (self.idx + 1) % len(self.points)
         return pt
 
-class LearningBasedSampler(SamplingMethod):
+class LearningBasedSampling(SamplingMethod):
     
-    def __init__(self, goal_bias=0.1, device='cpu'):
+    def __init__(self, goal_bias=0.1, device='cuda'):
         self.goal_bias = goal_bias
-        self.predictor = Predictor(join(dirname(dirname(dirname(abspath(__file__)))),"model/best_model.pth"), device)
+        self.predictor = Predictor(join(dirname(dirname(abspath(__file__))),"model/best_model.pth"), device)
         
     def sample(self, cost_map, start, goal):
         if np.random.rand() < self.goal_bias:
             return tuple(goal)
-        obstacle_map, start_map, goal_map, distance_map = self._generate_feature_maps(cost_map, start, goal)
-        prob_map = self.predictor.predict(obstacle_map, start_map, goal_map, distance_map)
+        obstacle_map, start_map, goal_map = self._generate_feature_maps(cost_map, start, goal)
+        prob_map = self.predictor.predict(obstacle_map, start_map, goal_map)
         sampled_point = self._sample_from_probability(prob_map, cost_map)
-        
+
         return sampled_point
     
     def _generate_feature_maps(self, cost_map, start, goal):
@@ -62,28 +64,32 @@ class LearningBasedSampler(SamplingMethod):
         goal_map = np.zeros_like(cost_map, dtype=np.float32)
         goal_row, goal_col = goal
         goal_map[goal_row, goal_col] = 1.0
-        free_space = 1 - obstacle_map
-        distance_map = distance_transform_edt(free_space)
-        if np.max(distance_map) > 0:
-            distance_map = distance_map / np.max(distance_map)
         
-        return obstacle_map, start_map, goal_map, distance_map
-    
+        return obstacle_map, start_map, goal_map
+
     def _sample_from_probability(self, prob_map, cost_map):
+        """
+        Sample from cells with probability > 0.5 with uniform distribution.
+        """
         h, w = prob_map.shape
-        prob_map_flat = prob_map.flatten()
-        prob_map_flat = np.maximum(prob_map_flat, 0) 
-        prob_map_flat = prob_map_flat / np.sum(prob_map_flat) 
-        sampled_idx = np.random.choice(len(prob_map_flat), p=prob_map_flat)
-        sampled_row = sampled_idx // w
-        sampled_col = sampled_idx % w
+
+        # Get all cells with probability > 0.5
+        high_prob_cells = np.argwhere(prob_map > 0.1)
+
+        # If no high probability cells, fall back
+        if len(high_prob_cells) == 0:
+            return self._get_random_free_point(cost_map)
+
         max_attempts = 100
         for attempt in range(max_attempts):
-            if cost_map[sampled_row, sampled_col] < 0.9: 
+            # Uniformly sample from high probability cells
+            sampled_idx = np.random.randint(0, len(high_prob_cells))
+            sampled_row, sampled_col = high_prob_cells[sampled_idx]
+
+            # Check if not obstacle
+            if cost_map[sampled_row, sampled_col] < 0.9:
                 return (sampled_row, sampled_col)
-            sampled_idx = np.random.choice(len(prob_map_flat), p=prob_map_flat)
-            sampled_row = sampled_idx // w
-            sampled_col = sampled_idx % w
+
         return self._get_random_free_point(cost_map)
     
     def _get_random_free_point(self, cost_map):

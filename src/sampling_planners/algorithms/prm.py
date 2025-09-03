@@ -1,6 +1,6 @@
 # algorithms/prm.py
-from src.sampling_planners.core.planner import Planner
-from src.sampling_planners.core.utils import collision_check, calculate_path_cost, heuristic, nearest_neighbor
+from ..core.planner import Planner
+from ..core.utils import collision_check, calculate_path_cost, heuristic, nearest_neighbor
 from scipy.spatial import KDTree
 import numpy as np
 import heapq
